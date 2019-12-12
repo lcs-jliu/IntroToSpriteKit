@@ -75,34 +75,34 @@ for i in 1...3 {
  Once you have selected the block of code, press the **Command** and / keys at the same time to toggle the comments off all at once.
  
  */
-//// Add a physics body for the hill
-//hill.physicsBody = SKPhysicsBody(texture: hill.texture!,
-//                                 alphaThreshold: 0.5,
-//                                 size: hill.size)
-//hill.physicsBody?.isDynamic = false // Hill will not move (not impacted by physics)
+// Add a physics body for the hill
+hill.physicsBody = SKPhysicsBody(texture: hill.texture!,
+                                 alphaThreshold: 0.5,
+                                 size: hill.size)
+hill.physicsBody?.isDynamic = false // Hill will not move (not impacted by physics)
 
-//// Add a physics body for the boulder
-//boulder.physicsBody = SKPhysicsBody(circleOfRadius: boulder.size.width * 0.5)
+// Add a physics body for the boulder
+boulder.physicsBody = SKPhysicsBody(circleOfRadius: boulder.size.width * 0.5)
 
-//// Add a physics body for all nodes with identifier "one of the crates"
-//for node in scene.children {
-//
-//    // Only look at nodes of type SKSpriteNode
-//    if let thisNode = node as? SKSpriteNode {
-//
-//        // Only the crates
-//        if thisNode.name == "one of the crates" {
-//
-//            // Add a physics body
-//            thisNode.physicsBody = SKPhysicsBody(rectangleOf: thisNode.size)
-//        }
-//
-//    }
-//
-//}
+// Add a physics body for all nodes with identifier "one of the crates"
+for node in scene.children {
 
-//// Configure the view so that physics body edges are visible
-//view.showsPhysics = true
+    // Only look at nodes of type SKSpriteNode
+    if let thisNode = node as? SKSpriteNode {
+
+        // Only the crates
+        if thisNode.name == "one of the crates" {
+
+            // Add a physics body
+            thisNode.physicsBody = SKPhysicsBody(rectangleOf: thisNode.size)
+        }
+
+    }
+
+}
+
+// Configure the view so that physics body edges are visible
+view.showsPhysics = true
 
 /*:
  ### Other types of physics bodies
@@ -132,8 +132,8 @@ for i in 1...3 {
 
  */
 
-//// Make an edge loop at the boundaries of the scene
-//scene.physicsBody = SKPhysicsBody(edgeLoopFrom: scene.frame)
+// Make an edge loop at the boundaries of the scene
+scene.physicsBody = SKPhysicsBody(edgeLoopFrom: scene.frame)
 
 /*:
  - Callout(Reflect):
@@ -163,8 +163,8 @@ scene.childNode(withName: "one of the crates")?.physicsBody?.mass
 // What is the current mass of the boulder?
 boulder.physicsBody?.mass
 
-//// Change the boulder's mass
-//boulder.physicsBody?.mass = 0.05
+// Change the boulder's mass
+boulder.physicsBody?.mass = 5
 
 /*:
  ### Changing the Direction of Gravity
@@ -204,12 +204,16 @@ scene.physicsWorld.gravity
  */
 
 // Exercise 1: Write your code below.
+//boulder.physicsBody?.restitution = 1
 
 // Exercise 2: Write your code below.
+//scene.childNode(withName: "one of the crates")?.physicsBody?.restitution = 1
 
 // Exercise 3: Write your code below.
+//hill.physicsBody?.friction = 1.0
 
 // Exercise 4: Write your code below.
+//scene.physicsWorld.gravity = CGVector(dx: 0, dy: 9.8)
 
 
 /*:
