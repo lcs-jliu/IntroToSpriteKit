@@ -78,8 +78,16 @@ class GameScene: SKScene {
         
         // Add a tree to the background
         let tree = SKSpriteNode(imageNamed: "Tree_1")
-        tree.position = CGPoint(x: background.size.width / 10, y: startGroundTile.size.height + tree.size.height / 2)
+        tree.position = CGPoint(x: background.size.width / 7, y: startGroundTile.size.height + tree.size.height / 2)
         self.addChild(tree)
+        
+        // Add a crystal to the background
+        let crystal = SKSpriteNode(imageNamed: "Crystal")
+        crystal.position = CGPoint(x: background.size.width / 2.5, y: startGroundTile.size.height + crystal.size.height / 2)
+        self.addChild(crystal)
+        
+        // Add a physics body for the snowman
+        crystal.physicsBody = SKPhysicsBody(texture: crystal.texture!, size: crystal.size)
         
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
