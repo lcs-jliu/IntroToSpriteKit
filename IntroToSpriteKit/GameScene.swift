@@ -18,6 +18,9 @@ class GameScene: SKScene {
     // This function runs once to set up the scene
     override func didMove(to view: SKView) {
         
+        // Setting an edge
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        
         // Set the background
         self.backgroundColor = .black
         let background = SKSpriteNode(imageNamed: "BG")
@@ -88,6 +91,14 @@ class GameScene: SKScene {
         
         // Add a physics body for the snowman
         crystal.physicsBody = SKPhysicsBody(texture: crystal.texture!, size: crystal.size)
+        crystal.physicsBody?.isDynamic = false
+        
+        // Drop candies from the top
+        let actionSpawnCandy = SKAction.run(spawnCandy)
+        let actionWait = SKAction.wait(forDuration: 0.5)
+        let sequenceSpawnThenWait = SKAction.sequence([actionSpawnCandy, actionWait])
+        let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 20)
+        self.run(actionRepeatlyAddSand)
         
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
@@ -103,6 +114,23 @@ class GameScene: SKScene {
             // Do nothing if the sound file could not be played
         }
 
+    }
+    
+    // This function will add a candy randomly
+    func spawnCandy() {
+        let candy = SKSpriteNode(imageNamed: "candy1")
+        
+        // Set the position of the candy
+        let y = self.size.height - candy.size.height
+        let x = CGFloat.random(in: 0...self.size.width)
+        candy.position = CGPoint(x: x, y: y)
+        
+        // Add a physics body to candy
+        candy.physicsBody = SKPhysicsBody(texture: candy.texture!, size: candy.size)
+        candy.physicsBody?.restitution = 0.5
+        candy.physicsBody?.usesPreciseCollisionDetection = true
+        
+        self.addChild(candy)
     }
     
     // This runs before each frame is rendered
