@@ -42,6 +42,13 @@ class GameScene: SKScene {
         let backgroundPhysicsBodyLocation = CGRect(x: -1 * background.size.width / 2, y:  -1 * background.size.height / 2 + startGroundTile.size.height, width: background.size.width, height: 1) // relative to sprite's position
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: backgroundPhysicsBodyLocation)
         
+        // Make the scene snow all the time
+        if let snow = SKEmitterNode(fileNamed: "Snow") {
+            
+            snow.position = CGPoint(x: background.size.width / 2, y: background.size.height)
+            self.addChild(snow)
+        }
+        
         // Add a igloo to the background
         let igloo = SKSpriteNode(imageNamed: "Igloo")
         igloo.position = CGPoint(x: background.size.width - igloo.size.width / 2 - 10, y: startGroundTile.size.height + igloo.size.height / 2)
