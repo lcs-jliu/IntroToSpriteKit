@@ -61,6 +61,11 @@ class GameScene: SKScene {
         igloo.physicsBody = SKPhysicsBody(texture: igloo.texture!, size: igloo.size)
         igloo.physicsBody?.isDynamic = false
         
+        // Add a crystal to the background
+        let crystal = SKSpriteNode(imageNamed: "Crystal")
+        crystal.position = CGPoint(x: background.size.width / 2.5, y: startGroundTile.size.height + crystal.size.height / 2)
+        self.addChild(crystal)
+        
         // Add a animated snowman into the scene
         let snowman = SKSpriteNode(imageNamed: "iceman_01")
         snowman.position = CGPoint(x: background.size.width - igloo.size.width - 35, y: startGroundTile.size.height + snowman.size.height / 2)
@@ -78,6 +83,7 @@ class GameScene: SKScene {
         
         // Add a physics body for the snowman
         snowman.physicsBody = SKPhysicsBody(texture: snowman.texture!, size: snowman.size)
+        snowman.physicsBody?.mass = 4
         
         // Make the snowman jump
         // Vector that allows an upward movement
@@ -96,11 +102,6 @@ class GameScene: SKScene {
         let tree = SKSpriteNode(imageNamed: "Tree_1")
         tree.position = CGPoint(x: background.size.width / 7, y: startGroundTile.size.height + tree.size.height / 2)
         self.addChild(tree)
-        
-        // Add a crystal to the background
-        let crystal = SKSpriteNode(imageNamed: "Crystal")
-        crystal.position = CGPoint(x: background.size.width / 2.5, y: startGroundTile.size.height + crystal.size.height / 2)
-        self.addChild(crystal)
         
         // Drop candies from the top
         let actionSpawnCandy = SKAction.run(spawnCandy)
@@ -140,7 +141,7 @@ class GameScene: SKScene {
         candy.physicsBody = SKPhysicsBody(texture: candy.texture!, size: candy.size)
         candy.physicsBody?.restitution = 0.5
         candy.physicsBody?.usesPreciseCollisionDetection = true
-        candy.physicsBody?.mass = 0.0001
+        candy.physicsBody?.mass = 0.01
         self.addChild(candy)
     }
     
