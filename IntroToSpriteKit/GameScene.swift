@@ -79,7 +79,7 @@ class GameScene: SKScene {
         
         // Create the snowman and add it in the scene
         let snowman = SKSpriteNode(imageNamed: "iceman_01")
-        snowman.position = CGPoint(x: background.size.width - igloo.size.width - 35, y: startGroundTile.size.height + snowman.size.height / 2)
+        snowman.position = CGPoint(x: background.size.width - igloo.size.width - 85, y: startGroundTile.size.height + snowman.size.height / 2)
         self.addChild(snowman)
         
         // Add a animation to the snowman
@@ -121,6 +121,21 @@ class GameScene: SKScene {
         let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 25)
         self.run(actionRepeatlyAddSand)
         
+        // Add greeting words on the animation
+        
+        // Wait until all the candies are dropped
+        let actionWaitEightSceonds = SKAction.wait(forDuration: 8)
+        
+        // Call the function to create an action
+        let actionWordsHorizontalShelf = SKAction.run(horizontalShelf)
+        
+        // Wait for the candies to drop and then for edge
+        let sequenceWaitThenFormEdge = SKAction.sequence([actionWaitEightSceonds, actionWordsHorizontalShelf])
+        
+        self.run(sequenceWaitThenFormEdge)
+        
+        
+        
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
         
@@ -155,6 +170,13 @@ class GameScene: SKScene {
         candy.physicsBody?.usesPreciseCollisionDetection = true
         candy.physicsBody?.mass = 0.01
         self.addChild(candy)
+    }
+    
+    // This function creates a edge loop for the wrods.
+    func horizontalShelf() {
+        // Set the horizontal shelf of the ground tiles
+        let wordsPhysicsBodyLocation = CGRect(x: 0, y: self.size.height / 2 - 20, width: self.size.width, height: 1)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: wordsPhysicsBodyLocation)
     }
     
     // This runs before each frame is rendered
