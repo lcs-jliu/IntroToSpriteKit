@@ -118,13 +118,13 @@ class GameScene: SKScene {
         let actionSpawnCandy = SKAction.run(spawnCandy)
         let actionWait = SKAction.wait(forDuration: 0.3)
         let sequenceSpawnThenWait = SKAction.sequence([actionSpawnCandy, actionWait])
-        let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 25)
+        let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 20)
         self.run(actionRepeatlyAddSand)
         
         /// Add greeting words on the animation
         
         // Action that will wait for 8 seconds
-        let actionWaitEightSceonds = SKAction.wait(forDuration: 8)
+        let actionWaitEightSceonds = SKAction.wait(forDuration: 6.5)
         
         // Call the function to create an action
         let actionWordsHorizontalShelf = SKAction.run(horizontalShelf)
@@ -151,7 +151,7 @@ class GameScene: SKScene {
         // Add letters "Merry" that will fall down from the top
         
         // Call the function, which will add letters "Merry" into the scene to create an action
-        let actionWaitNineSeconds = SKAction.wait(forDuration: 9)
+        let actionWaitNineSeconds = SKAction.wait(forDuration: 7.5)
         let actionDropLetters = SKAction.run(addLetters)
         let sequenceWaitThenDropLetters = SKAction.sequence([actionWaitNineSeconds, actionDropLetters])
         self.run(sequenceWaitThenDropLetters)
@@ -217,6 +217,27 @@ class GameScene: SKScene {
         // Add the letters into the scene
         self.addChild(letters2)
         
+        // Show end credit
+        let actionWaitTwoSeconds = SKAction.wait(forDuration: 2)
+        let actionShowEndCredits = SKAction.run(ShowEndCredits)
+        let actionWaitThenShowEndCredits = SKAction.sequence([actionWaitTwoSeconds, actionShowEndCredits])
+        self.run(actionWaitThenShowEndCredits)
+        
+    }
+    
+    // This function will remove everything and show end credits
+    func ShowEndCredits() {
+
+        // Remove everything from the screen
+        self.removeAllChildren()
+        // Add  the end credit
+        let credit = SKLabelNode(fontNamed: "Arial")
+        credit.fontSize = 50
+        credit.fontColor = .white
+        credit.text = "Brought to you by Jason Liu"
+        credit.zPosition = 3
+        credit.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        self.addChild(credit)
     }
     
     // This runs before each frame is rendered
