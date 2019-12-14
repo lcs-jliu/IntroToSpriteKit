@@ -133,20 +133,31 @@ class GameScene: SKScene {
         let sequenceWaitThenFormEdge = SKAction.sequence([actionWaitEightSceonds, actionWordsHorizontalShelf])
         self.run(sequenceWaitThenFormEdge)
         
-        // Create letters "Christmas" that will fall down from the top
+        // Add letters "Christmas" that will fall down from the top
         
-        // Give the letters basic properties
+        // Create letters "Christmas" and give basic properties to it
         let letters = SKLabelNode(fontNamed: "Rockwell")
         letters.fontSize = 100
         letters.fontColor = .white
         letters.text = "Christmas"
         letters.position = CGPoint(x: 400, y: background.size.height + 10)
-        
+
         // Add a physics body to the letters
         letters.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 500, height: 100), center: CGPoint(x: 0 ,y: 30))
-        
+
         // Add the letters into the scene
         self.addChild(letters)
+        
+        // Add letters "Merry" that will fall down from the top
+        
+        // Call the function, which will add letters "Merry" into the scene to create an action
+        let actionWaitNineSeconds = SKAction.wait(forDuration: 9)
+        let actionDropLetters = SKAction.run(addLetters)
+        let sequenceWaitThenDropLetters = SKAction.sequence([actionWaitNineSeconds, actionDropLetters])
+        self.run(sequenceWaitThenDropLetters)
+        
+        
+        
         
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
@@ -189,6 +200,23 @@ class GameScene: SKScene {
         // Set the horizontal shelf of the words
         let wordsPhysicsBodyLocation = CGRect(x: 0, y: self.size.height / 2 - 20, width: self.size.width, height: 1)
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: wordsPhysicsBodyLocation)
+    }
+    
+    func addLetters() {
+        
+        // Create letters "Merry" and give basic properties to it
+        let letters2 = SKLabelNode(fontNamed: "Rockwell")
+        letters2.fontSize = 100
+        letters2.fontColor = .white
+        letters2.text = "Merry"
+        letters2.position = CGPoint(x: 400, y: self.size.height + 50)
+        
+        // Add a physics body to the letters
+        letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 500, height: 100), center: CGPoint(x: 0 ,y: 30))
+        
+        // Add the letters into the scene
+        self.addChild(letters2)
+        
     }
     
     // This runs before each frame is rendered
