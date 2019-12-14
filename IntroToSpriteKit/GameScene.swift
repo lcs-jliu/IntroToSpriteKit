@@ -79,6 +79,19 @@ class GameScene: SKScene {
         // Add a physics body for the snowman
         snowman.physicsBody = SKPhysicsBody(texture: snowman.texture!, size: snowman.size)
         
+        // Make the snowman jump
+        // Vector that allows an upward movement
+        let moveUp = CGVector(dx: 0, dy: 700)
+        
+        // Actions that needed to achieve repeated jumping
+        let actionUpwardsMovement = SKAction.move(by: moveUp, duration: 1)
+        let actionWaitForTwoSeconds = SKAction.wait(forDuration: 2.0)
+        let actionWaitThenJump = SKAction.sequence([actionWaitForTwoSeconds, actionUpwardsMovement])
+        
+        // Make the snowman jump 3 times
+        let moveUpRepeat = SKAction.repeat(actionWaitThenJump, count: 3)
+        snowman.run(moveUpRepeat)
+        
         // Add a tree to the background
         let tree = SKSpriteNode(imageNamed: "Tree_1")
         tree.position = CGPoint(x: background.size.width / 7, y: startGroundTile.size.height + tree.size.height / 2)
@@ -88,10 +101,6 @@ class GameScene: SKScene {
         let crystal = SKSpriteNode(imageNamed: "Crystal")
         crystal.position = CGPoint(x: background.size.width / 2.5, y: startGroundTile.size.height + crystal.size.height / 2)
         self.addChild(crystal)
-        
-        // Add a physics body for the snowman
-        crystal.physicsBody = SKPhysicsBody(texture: crystal.texture!, size: crystal.size)
-        crystal.physicsBody?.isDynamic = false
         
         // Drop candies from the top
         let actionSpawnCandy = SKAction.run(spawnCandy)
@@ -129,7 +138,7 @@ class GameScene: SKScene {
         candy.physicsBody = SKPhysicsBody(texture: candy.texture!, size: candy.size)
         candy.physicsBody?.restitution = 0.5
         candy.physicsBody?.usesPreciseCollisionDetection = true
-        
+        candy.physicsBody?.mass = 0.0001
         self.addChild(candy)
     }
     
