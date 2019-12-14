@@ -88,29 +88,29 @@ hero.run(actionWalkAndJump)
     Then run the playground and see if your prediction was accurate.
  */
 
-//// Remove all existing actions tied to the hero
-//// NOTE: This causes the hero to disappear if walking sequence is interrupted, so...
-//hero.removeAllActions()
-//
-//// ... re-set the hero's image back to the starting texture
-//let originalHeroImage = SKTexture(imageNamed: "hero")
-//let actionSetToOriginalTexture = SKAction.setTexture(originalHeroImage)
-//hero.run(actionSetToOriginalTexture)
-//
-//// Add an action that plays a jump sound effect
-//let actionJumpSoundEffect = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
-//
-//// Revise the wait then jump sequence (to include the new sound effect action, played just before the jump)
-//sequenceWaitThenJump = SKAction.sequence([actionBriefWait, actionJumpSoundEffect, actionJump])
-//
-//// Re-set the repeated wait-then-jump sequence (to use the revised jump sequence that now includes the sound effect)
-//actionWaitThenJumpRepeatedTwice = SKAction.repeat(sequenceWaitThenJump, count: 2)
-//
-//// Re-set the walk-while-jumping sequence (now with sound effect)
-//actionWalkAndJump = SKAction.group([actionWalkAndMoveTenTimes, actionWaitThenJumpRepeatedTwice])
-//
-//// Have the hero run the revised action (now with sound effect)
-//hero.run(actionWalkAndJump)
+// Remove all existing actions tied to the hero
+// NOTE: This causes the hero to disappear if walking sequence is interrupted, so...
+hero.removeAllActions()
+
+// ... re-set the hero's image back to the starting texture
+let originalHeroImage = SKTexture(imageNamed: "hero")
+let actionSetToOriginalTexture = SKAction.setTexture(originalHeroImage)
+hero.run(actionSetToOriginalTexture)
+
+// Add an action that plays a jump sound effect
+let actionJumpSoundEffect = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
+
+// Revise the wait then jump sequence (to include the new sound effect action, played just before the jump)
+sequenceWaitThenJump = SKAction.sequence([actionBriefWait, actionJumpSoundEffect, actionJump])
+
+// Re-set the repeated wait-then-jump sequence (to use the revised jump sequence that now includes the sound effect)
+actionWaitThenJumpRepeatedTwice = SKAction.repeat(sequenceWaitThenJump, count: 2)
+
+// Re-set the walk-while-jumping sequence (now with sound effect)
+actionWalkAndJump = SKAction.group([actionWalkAndMoveTenTimes, actionWaitThenJumpRepeatedTwice])
+
+// Have the hero run the revised action (now with sound effect)
+hero.run(actionWalkAndJump)
 
 /*:
  The above code is longer than it really needs to be, since it revises actions already assigned to the hero.
@@ -164,22 +164,22 @@ hero.run(actionWalkAndJump)
  */
 
 
-//// Create a variable to store a background music player instance
-//var backgroundMusic: AVAudioPlayer?
-//
-//// Get a reference to the mp3 file in playground Resources folder
-//let backgroundMusicFilePath = Bundle.main.path(forResource: "game-level-background-music.mp3", ofType: nil)!
-//
-//// Convert the file path string to a URL (Uniform Resource Locator)
-//let backgroundMusicFileURL = URL(fileURLWithPath: backgroundMusicFilePath)
-//
-//// Attempt to open and play the file at the given URL
-//do {
-//    backgroundMusic = try AVAudioPlayer(contentsOf: backgroundMusicFileURL)
-//    backgroundMusic?.play()
-//} catch {
-//    // Do nothing if the sound file could not be played
-//}
+// Create a variable to store a background music player instance
+var backgroundMusic: AVAudioPlayer?
+
+// Get a reference to the mp3 file in playground Resources folder
+let backgroundMusicFilePath = Bundle.main.path(forResource: "game-level-background-music.mp3", ofType: nil)!
+
+// Convert the file path string to a URL (Uniform Resource Locator)
+let backgroundMusicFileURL = URL(fileURLWithPath: backgroundMusicFilePath)
+
+// Attempt to open and play the file at the given URL
+do {
+    backgroundMusic = try AVAudioPlayer(contentsOf: backgroundMusicFileURL)
+    backgroundMusic?.play()
+} catch {
+    // Do nothing if the sound file could not be played
+}
 
 /*:
  ### Useful Resources

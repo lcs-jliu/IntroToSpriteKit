@@ -20,6 +20,10 @@ class GameScene: SKScene {
         
         // Set the background colour
         self.backgroundColor = .black
+        let background = SKSpriteNode(imageNamed: "BG")
+        background.position = CGPoint(x: background.size.width / 2, y: background.size.height / 2)
+        self.addChild(background)
+        
         
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
