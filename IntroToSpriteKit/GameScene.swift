@@ -156,10 +156,7 @@ class GameScene: SKScene {
         let sequenceWaitThenDropLetters = SKAction.sequence([actionWaitNineSeconds, actionDropLetters])
         self.run(sequenceWaitThenDropLetters)
         
-        
-        
-        
-        // Get a reference to the mp3 file in the app bundle
+        /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
         
         // Convert the file path string to a URL (Uniform Resource Locator)
@@ -202,6 +199,7 @@ class GameScene: SKScene {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: wordsPhysicsBodyLocation)
     }
     
+    /// This function creates letters "Merry"
     func addLetters() {
         
         // Create letters "Merry" and give basic properties to it
@@ -225,7 +223,7 @@ class GameScene: SKScene {
         
     }
     
-    // This function will remove everything and show end credits
+    /// This function will remove everything and show end credits
     func ShowEndCredits() {
 
         // Remove everything from the screen
