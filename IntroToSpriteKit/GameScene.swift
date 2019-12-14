@@ -54,6 +54,10 @@ class GameScene: SKScene {
         igloo.position = CGPoint(x: background.size.width - igloo.size.width / 2 - 10, y: startGroundTile.size.height + igloo.size.height / 2)
         self.addChild(igloo)
         
+        // Add a physics body for the igloo
+        igloo.physicsBody = SKPhysicsBody(texture: igloo.texture!, size: igloo.size)
+        igloo.physicsBody?.isDynamic = false
+        
         // Add a animated snowman into the scene
         let snowman = SKSpriteNode(imageNamed: "iceman_01")
         snowman.position = CGPoint(x: background.size.width - igloo.size.width - 35, y: startGroundTile.size.height + snowman.size.height / 2)
@@ -69,6 +73,13 @@ class GameScene: SKScene {
         let actionSnowmanAnimationRepeat = SKAction.repeat(actionSnowmanAnimation, count: 10)
         snowman.run(actionSnowmanAnimationRepeat)
         
+        // Add a physics body for the snowman
+        snowman.physicsBody = SKPhysicsBody(texture: snowman.texture!, size: snowman.size)
+        
+        // Add a tree to the background
+        let tree = SKSpriteNode(imageNamed: "Tree_1")
+        tree.position = CGPoint(x: background.size.width / 10, y: startGroundTile.size.height + tree.size.height / 2)
+        self.addChild(tree)
         
         // Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
