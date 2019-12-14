@@ -22,27 +22,36 @@ class GameScene: SKScene {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         // Set the background
+        
+        // Default background
         self.backgroundColor = .black
+        
+        //Actual background
         let background = SKSpriteNode(imageNamed: "BG")
         background.position = CGPoint(x: background.size.width / 2, y: background.size.height / 2)
         self.addChild(background)
         
-        //Add ground tiles into the animation
+        // Add ground tiles into the animation
+        
+        // Add the starting ground tile
         let startGroundTile = SKSpriteNode(imageNamed: "groundTileStart")
         startGroundTile.position = CGPoint(x: startGroundTile.size.width / 2, y: startGroundTile.size.height / 2)
         self.addChild(startGroundTile)
         
+        // Add the ending ground tile
         let endGroundTile = SKSpriteNode(imageNamed: "groundTileEnd")
         endGroundTile.position = CGPoint(x: background.size.width - endGroundTile.size.width / 2, y: endGroundTile.size.height / 2)
         self.addChild(endGroundTile)
         
+        // Add all the ground tile in the middle
         for i in 1...8 {
             let groundTile = SKSpriteNode(imageNamed: "groundTileMiddle")
             groundTile.position = CGPoint(x: groundTile.size.width / 2 + CGFloat(i) * groundTile.size.width , y: groundTile.size.height / 2)
             self.addChild(groundTile)
         }
         
-        let backgroundPhysicsBodyLocation = CGRect(x: -1 * background.size.width / 2, y:  -1 * background.size.height / 2 + startGroundTile.size.height, width: background.size.width, height: 1) // relative to sprite's position
+        // Set the horizontal shelf of the ground tiles
+        let backgroundPhysicsBodyLocation = CGRect(x: -1 * background.size.width / 2, y:  -1 * background.size.height / 2 + startGroundTile.size.height, width: background.size.width, height: 1)
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: backgroundPhysicsBodyLocation)
         
         // Make the scene snow all the time
@@ -57,7 +66,7 @@ class GameScene: SKScene {
         igloo.position = CGPoint(x: background.size.width - igloo.size.width / 2 - 10, y: startGroundTile.size.height + igloo.size.height / 2)
         self.addChild(igloo)
         
-        // Add a physics body for the igloo
+        // Add a physics body and properities for the igloo
         igloo.physicsBody = SKPhysicsBody(texture: igloo.texture!, size: igloo.size)
         igloo.physicsBody?.isDynamic = false
         
@@ -67,10 +76,13 @@ class GameScene: SKScene {
         self.addChild(crystal)
         
         // Add a animated snowman into the scene
+        
+        // Create the snowman and add it in the scene
         let snowman = SKSpriteNode(imageNamed: "iceman_01")
         snowman.position = CGPoint(x: background.size.width - igloo.size.width - 35, y: startGroundTile.size.height + snowman.size.height / 2)
         self.addChild(snowman)
         
+        // Add a animation to the snowman
         var snowmanTextures: [SKTexture] = []
         snowmanTextures.append(SKTexture(imageNamed: "iceman_01"))
         snowmanTextures.append(SKTexture(imageNamed: "iceman_02"))
@@ -81,21 +93,20 @@ class GameScene: SKScene {
         let actionSnowmanAnimationRepeat = SKAction.repeat(actionSnowmanAnimation, count: 10)
         snowman.run(actionSnowmanAnimationRepeat)
         
-        // Add a physics body for the snowman
+        // Add a physics body and properities for the snowman
         snowman.physicsBody = SKPhysicsBody(texture: snowman.texture!, size: snowman.size)
         snowman.physicsBody?.mass = 4
         
         // Make the snowman jump
-        // Vector that allows an upward movement
-        let moveUp = CGVector(dx: 0, dy: 700)
         
         // Actions that needed to achieve repeated jumping
+        let moveUp = CGVector(dx: 0, dy: 700)
         let actionUpwardsMovement = SKAction.move(by: moveUp, duration: 1)
         let actionWaitForTwoSeconds = SKAction.wait(forDuration: 2.0)
         let actionWaitThenJump = SKAction.sequence([actionWaitForTwoSeconds, actionUpwardsMovement])
         
-        // Make the snowman jump 3 times
-        let moveUpRepeat = SKAction.repeat(actionWaitThenJump, count: 3)
+        // Make the snowman jump 2 times
+        let moveUpRepeat = SKAction.repeat(actionWaitThenJump, count: 2)
         snowman.run(moveUpRepeat)
         
         // Add a tree to the background
@@ -128,6 +139,7 @@ class GameScene: SKScene {
     
     // This function will add a candy randomly
     func spawnCandy() {
+        // Generate a random number based on the image names
         let n = Int.random(in: 1...9)
         
         let candy = SKSpriteNode(imageNamed: "candy\(n)")
@@ -137,7 +149,7 @@ class GameScene: SKScene {
         let x = CGFloat.random(in: 0...self.size.width)
         candy.position = CGPoint(x: x, y: y)
         
-        // Add a physics body to candy
+        // Add a physics body and properities to candy
         candy.physicsBody = SKPhysicsBody(texture: candy.texture!, size: candy.size)
         candy.physicsBody?.restitution = 0.5
         candy.physicsBody?.usesPreciseCollisionDetection = true
