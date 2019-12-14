@@ -136,9 +136,9 @@ class GameScene: SKScene {
         // Add letters "Christmas" that will fall down from the top
         
         // Create letters "Christmas" and give basic properties to it
-        let letters = SKLabelNode(fontNamed: "Rockwell")
+        let letters = SKLabelNode(fontNamed: "Chalkduster")
         letters.fontSize = 100
-        letters.fontColor = .white
+        letters.fontColor = .yellow
         letters.text = "Christmas"
         letters.position = CGPoint(x: 400, y: background.size.height + 10)
 
@@ -205,9 +205,9 @@ class GameScene: SKScene {
     func addLetters() {
         
         // Create letters "Merry" and give basic properties to it
-        let letters2 = SKLabelNode(fontNamed: "Rockwell")
+        let letters2 = SKLabelNode(fontNamed: "Chalkduster")
         letters2.fontSize = 100
-        letters2.fontColor = .white
+        letters2.fontColor = .red
         letters2.text = "Merry"
         letters2.position = CGPoint(x: 400, y: self.size.height + 50)
         
