@@ -54,6 +54,20 @@ class GameScene: SKScene {
         igloo.position = CGPoint(x: background.size.width - igloo.size.width / 2 - 10, y: startGroundTile.size.height + igloo.size.height / 2)
         self.addChild(igloo)
         
+        // Add a animated snowman into the scene
+        let snowman = SKSpriteNode(imageNamed: "iceman_01")
+        snowman.position = CGPoint(x: background.size.width - igloo.size.width - 35, y: startGroundTile.size.height + snowman.size.height / 2)
+        self.addChild(snowman)
+        
+        var snowmanTextures: [SKTexture] = []
+        snowmanTextures.append(SKTexture(imageNamed: "iceman_01"))
+        snowmanTextures.append(SKTexture(imageNamed: "iceman_02"))
+        snowmanTextures.append(SKTexture(imageNamed: "iceman_04"))
+        snowmanTextures.append(SKTexture(imageNamed: "iceman_05"))
+
+        let actionSnowmanAnimation = SKAction.animate(with: snowmanTextures, timePerFrame: 0.5, resize: true, restore: true)
+        let actionSnowmanAnimationRepeat = SKAction.repeat(actionSnowmanAnimation, count: 10)
+        snowman.run(actionSnowmanAnimationRepeat)
         
         
         // Get a reference to the mp3 file in the app bundle
