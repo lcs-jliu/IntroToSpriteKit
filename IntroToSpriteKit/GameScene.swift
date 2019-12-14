@@ -104,9 +104,9 @@ class GameScene: SKScene {
         
         // Drop candies from the top
         let actionSpawnCandy = SKAction.run(spawnCandy)
-        let actionWait = SKAction.wait(forDuration: 0.5)
+        let actionWait = SKAction.wait(forDuration: 0.3)
         let sequenceSpawnThenWait = SKAction.sequence([actionSpawnCandy, actionWait])
-        let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 20)
+        let actionRepeatlyAddSand = SKAction.repeat(sequenceSpawnThenWait, count: 25)
         self.run(actionRepeatlyAddSand)
         
         // Get a reference to the mp3 file in the app bundle
@@ -127,7 +127,9 @@ class GameScene: SKScene {
     
     // This function will add a candy randomly
     func spawnCandy() {
-        let candy = SKSpriteNode(imageNamed: "candy1")
+        let n = Int.random(in: 1...9)
+        
+        let candy = SKSpriteNode(imageNamed: "candy\(n)")
         
         // Set the position of the candy
         let y = self.size.height - candy.size.height
