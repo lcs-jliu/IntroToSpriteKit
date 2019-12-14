@@ -49,26 +49,26 @@ PlaygroundSupport.PlaygroundPage.current.liveView = view
     You should see the character repeatedly making a motion.
  
  */
-//// Create [SKTexture] array
-//var throwFireBallTextures: [SKTexture] = []     // Empty array
-//throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_0"))
-//throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_1"))
-//throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_2"))
-//
-//// Create an action to animate throwing a fireball
-//let throwFireballAnimation = SKAction.animate(with: throwFireBallTextures, timePerFrame: 0.2, resize: true, restore: true)
-//
-//// Wait a bit
-//let actionWaitASecond = SKAction.wait(forDuration: 1)
-//
-//// Make a sequence – throw fireball, then wait
-//var actionThrowFireBallThenWait = SKAction.sequence([throwFireballAnimation, actionWaitASecond])
-//
-//// Repeat the sequence
-//var throwFireBallRepeatedly = SKAction.repeatForever(actionThrowFireBallThenWait)
-//
-//// Cause the character to throw the fireball
-//character.run(throwFireBallRepeatedly)
+// Create [SKTexture] array
+var throwFireBallTextures: [SKTexture] = []     // Empty array
+throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_0"))
+throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_1"))
+throwFireBallTextures.append(SKTexture(imageNamed: "sf_fireball_2"))
+
+// Create an action to animate throwing a fireball
+let throwFireballAnimation = SKAction.animate(with: throwFireBallTextures, timePerFrame: 0.1, resize: true, restore: true)
+
+// Wait a bit
+let actionWaitASecond = SKAction.wait(forDuration: 1)
+
+// Make a sequence – throw fireball, then wait
+var actionThrowFireBallThenWait = SKAction.sequence([throwFireballAnimation, actionWaitASecond])
+
+// Repeat the sequence
+var throwFireBallRepeatedly = SKAction.repeatForever(actionThrowFireBallThenWait)
+
+// Cause the character to throw the fireball
+character.run(throwFireBallRepeatedly)
 
 /*:
  Doesn't it look like the character should be throwing a fireball? Let's make that happen.
@@ -86,57 +86,57 @@ PlaygroundSupport.PlaygroundPage.current.liveView = view
  
  */
 
-//// Add a method to the CGFloat type that converts from degrees to radians
-//// NOTE: Not strictly required, but makes it easier to think about how to rotate the particle emitter
-//extension CGFloat {
-//    func toRadians() -> CGFloat {
-//        return self * CGFloat(Double.pi) / 180
-//    }
-//}
-//
-////// Create an instance of the 'SKParticleEmitter' Node at the right edge of the character's arm
-//func generateFireball() {
-//    
-//    // Attempt to create an SKEmitterNode instance based on a file named "Fire.sks" (see Resources folder)
-//    if let fireball = SKEmitterNode(fileNamed: "Fire") {
-//        
-//        // Create the fireball at the tip of the character's arm
-//        fireball.position = CGPoint(x: character.position.x + 40, y: character.position.y + 27)
-//        
-//        // Make the fireball point to the right
-//        let actionRotate = SKAction.rotate(byAngle: CGFloat(90).toRadians(), duration: 0)
-//        fireball.run(actionRotate)
-//        
-//        // Add fireball to scene
-//        scene.addChild(fireball)
-//        
-//        // Move the fireball
-//        let actionMoveFireball = SKAction.moveTo(x: scene.size.width * 1.5, duration: 1.5)
-//        fireball.run(actionMoveFireball)
-//    }
-//    
-//}
-//
-//// Create an action that calls the `generateFireball` method
-//let actionGenerateFireball = SKAction.run(generateFireball)
-//
-//// Modify the actions in the actionThrowFireBallThenWait sequence to include the fireball generation action
-//actionThrowFireBallThenWait = SKAction.sequence([throwFireballAnimation, actionGenerateFireball, actionWaitASecond])
-//
-//// Re-set the throwFireBallRepeatedly action using the revised sequence from line 122
-//throwFireBallRepeatedly = SKAction.repeatForever(actionThrowFireBallThenWait)
-//
-//// Remove all existing actions tied to this node
-//// NOTE: This causes the character to disappear if the throwing fireball sequence is interrupted, so...
-//character.removeAllActions()
-//
-//// ... re-set the character's image back to the starting texture
-//let originalCharacterImage = SKTexture(imageNamed: "sf")
-//let actionSetToOriginalTexture = SKAction.setTexture(originalCharacterImage)
-//character.run(actionSetToOriginalTexture)
-//
-//// Add the revised actionThrowFireBallThenWait sequence and run repeatedly
-//character.run(throwFireBallRepeatedly)
+// Add a method to the CGFloat type that converts from degrees to radians
+// NOTE: Not strictly required, but makes it easier to think about how to rotate the particle emitter
+extension CGFloat {
+    func toRadians() -> CGFloat {
+        return self * CGFloat(Double.pi) / 180
+    }
+}
+
+// Create an instance of the 'SKParticleEmitter' Node at the right edge of the character's arm
+func generateFireball() {
+    
+    // Attempt to create an SKEmitterNode instance based on a file named "Fire.sks" (see Resources folder)
+    if let fireball = SKEmitterNode(fileNamed: "Fire") {
+        
+        // Create the fireball at the tip of the character's arm
+        fireball.position = CGPoint(x: character.position.x + 40, y: character.position.y + 27)
+        
+        // Make the fireball point to the right
+        let actionRotate = SKAction.rotate(byAngle: CGFloat(90).toRadians(), duration: 0)
+        fireball.run(actionRotate)
+        
+        // Add fireball to scene
+        scene.addChild(fireball)
+        
+        // Move the fireball
+        let actionMoveFireball = SKAction.moveTo(x: scene.size.width * 1.2, duration: 1.5)
+        fireball.run(actionMoveFireball)
+    }
+    
+}
+
+// Create an action that calls the `generateFireball` method
+let actionGenerateFireball = SKAction.run(generateFireball)
+
+// Modify the actions in the actionThrowFireBallThenWait sequence to include the fireball generation action
+actionThrowFireBallThenWait = SKAction.sequence([throwFireballAnimation, actionGenerateFireball, actionWaitASecond])
+
+// Re-set the throwFireBallRepeatedly action using the revised sequence from line 122
+throwFireBallRepeatedly = SKAction.repeatForever(actionThrowFireBallThenWait)
+
+// Remove all existing actions tied to this node
+// NOTE: This causes the character to disappear if the throwing fireball sequence is interrupted, so...
+character.removeAllActions()
+
+// ... re-set the character's image back to the starting texture
+let originalCharacterImage = SKTexture(imageNamed: "sf")
+let actionSetToOriginalTexture = SKAction.setTexture(originalCharacterImage)
+character.run(actionSetToOriginalTexture)
+
+// Add the revised actionThrowFireBallThenWait sequence and run repeatedly
+character.run(throwFireBallRepeatedly)
 
 /*:
 ### About Particle Effects
@@ -180,11 +180,24 @@ PlaygroundSupport.PlaygroundPage.current.liveView = view
 // Exercise 1: Write your code below.
 
 // Here is some starter code (assuming that your new particle emitter file is named "Snow.sks"
-if let snowstorm = SKEmitterNode(fileNamed: "Snow") {
-
-    // Position the node and add to scene – write the code to make this happen
-    
+func generateSnowStorm() {
+    if let snowstorm = SKEmitterNode(fileNamed: "Snow") {
+        // Position the node and add to scene – write the code to make this happen
+        
+        let y = CGFloat.random(in: 0...scene.size.height)
+        let x = CGFloat.random(in: 0...scene.size.width)
+        
+        snowstorm.position = CGPoint(x: x, y: y)
+        
+        scene.addChild(snowstorm)
+        }
 }
+
+let actionGenerateSnowStorm = SKAction.run(generateSnowStorm)
+
+scene.run(SKAction.repeatForever(actionGenerateSnowStorm))
+
+
 
 
 /*:

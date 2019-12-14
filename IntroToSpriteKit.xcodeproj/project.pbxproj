@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E0C826523A16E0600DC5990 /* sleigh-bells-excerpt.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C826423A16E0600DC5990 /* sleigh-bells-excerpt.mp3 */; };
 		0EF3302A23A0433100A83858 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0EF3302923A0433100A83858 /* Fire.sks */; };
+		421A62E323A474BF00CC175C /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 421A62E223A474BF00CC175C /* Snow.sks */; };
 		81279437239BEC4C000EBED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81279436239BEC4C000EBED0 /* AppDelegate.swift */; };
 		8127943D239BEC4C000EBED0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8127943C239BEC4C000EBED0 /* GameScene.swift */; };
 		8127943F239BEC4C000EBED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8127943E239BEC4C000EBED0 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		0E0C826423A16E0600DC5990 /* sleigh-bells-excerpt.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sleigh-bells-excerpt.mp3"; sourceTree = "<group>"; };
 		0EF3302923A0433100A83858 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
+		421A62E223A474BF00CC175C /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		81279433239BEC4C000EBED0 /* IntroToSpriteKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntroToSpriteKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81279436239BEC4C000EBED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8127943C239BEC4C000EBED0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				81279446239BEC4D000EBED0 /* IntroToSpriteKit.entitlements */,
 				0E0C826423A16E0600DC5990 /* sleigh-bells-excerpt.mp3 */,
 				0EF3302923A0433100A83858 /* Fire.sks */,
+				421A62E223A474BF00CC175C /* Snow.sks */,
 			);
 			path = IntroToSpriteKit;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 				0EF3302A23A0433100A83858 /* Fire.sks in Resources */,
 				0E0C826523A16E0600DC5990 /* sleigh-bells-excerpt.mp3 in Resources */,
 				81279441239BEC4D000EBED0 /* Assets.xcassets in Resources */,
+				421A62E323A474BF00CC175C /* Snow.sks in Resources */,
 				81279444239BEC4D000EBED0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
