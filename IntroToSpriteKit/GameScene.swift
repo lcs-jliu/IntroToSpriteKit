@@ -185,14 +185,14 @@ class GameScene: SKScene {
         /// Add ice cubes once the words are dropped
         
         // Add First row of ice cubes
-        let actionwaitTwelveSeconds = SKAction.wait(forDuration: 7.5)
+        let actionwaitSevenSeconds = SKAction.wait(forDuration: 7)
         let actionAddIceCube = SKAction.run(addFirstIceCubes)
-        let sequenceWaitThenAddIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddIceCube])
+        let sequenceWaitThenAddIce = SKAction.sequence([actionwaitSevenSeconds, actionAddIceCube])
         self.run(sequenceWaitThenAddIce)
         
         // Add Second row of ice cubes
         let actionAddSecondIceCube = SKAction.run(addSecondIceCubes)
-        let sequenceWaitThenAddSecondIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddSecondIceCube])
+        let sequenceWaitThenAddSecondIce = SKAction.sequence([actionwaitSevenSeconds, actionAddSecondIceCube])
         self.run(sequenceWaitThenAddSecondIce)
         
         /// Add a deer walking on ice cubes
