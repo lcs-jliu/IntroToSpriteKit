@@ -141,9 +141,10 @@ class GameScene: SKScene {
         letters.fontColor = .yellow
         letters.text = "Christmas"
         letters.position = CGPoint(x: 400, y: background.size.height + 10)
+        letters.zPosition = 10
 
         // Add a physics body to the letters
-        letters.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 500, height: 100), center: CGPoint(x: 0 ,y: 30))
+        letters.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 600, height: 100), center: CGPoint(x: 0 ,y: 45))
 
         // Add the letters into the scene
         self.addChild(letters)
@@ -156,6 +157,12 @@ class GameScene: SKScene {
         let sequenceWaitThenDropLetters = SKAction.sequence([actionWaitNineSeconds, actionDropLetters])
         self.run(sequenceWaitThenDropLetters)
         
+        // Add ice cubes once the words are dropped
+        let actionwaitTwelveSeconds = SKAction.wait(forDuration: 7.5)
+        let actionAddIceCube = SKAction.run(addIceCube)
+        let sequenceWaitThenAddIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddIceCube])
+        self.run(sequenceWaitThenAddIce)
+        
         /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
         
@@ -166,6 +173,13 @@ class GameScene: SKScene {
         do {
             backgroundMusic = try AVAudioPlayer(contentsOf: backgroundMusicFileURL)
             backgroundMusic?.play()
+            
+        /// Show end credit
+        let actionWaitTwelveSeconds = SKAction.wait(forDuration: 12)
+        let actionShowEndCredits = SKAction.run(ShowEndCredits)
+        let actionWaitThenShowEndCredits = SKAction.sequence([actionWaitTwelveSeconds, actionShowEndCredits])
+        self.run(actionWaitThenShowEndCredits)
+        
         } catch {
             // Do nothing if the sound file could not be played
         }
@@ -208,19 +222,24 @@ class GameScene: SKScene {
         letters2.fontColor = .red
         letters2.text = "Merry"
         letters2.position = CGPoint(x: 400, y: self.size.height + 50)
+        letters2.zPosition = 10
         
         // Add a physics body to the letters
         letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 500, height: 100), center: CGPoint(x: 0 ,y: 30))
         
         // Add the letters into the scene
         self.addChild(letters2)
-        
-        // Show end credit
-        let actionWaitTwoSeconds = SKAction.wait(forDuration: 2)
-        let actionShowEndCredits = SKAction.run(ShowEndCredits)
-        let actionWaitThenShowEndCredits = SKAction.sequence([actionWaitTwoSeconds, actionShowEndCredits])
-        self.run(actionWaitThenShowEndCredits)
-        
+    }
+    
+    func addIceCube() {
+        // Create ice cube in the scene
+        for n in 2...7 {
+            let iceCube = SKSpriteNode(imageNamed: "IceBox")
+            let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width / 2
+            let height = self.size.height / 2 + iceCube.size.height / 3
+            iceCube.position = CGPoint(x: width, y: height)
+            self.addChild(iceCube)
+        }
     }
     
     /// This function will remove everything and show end credits
