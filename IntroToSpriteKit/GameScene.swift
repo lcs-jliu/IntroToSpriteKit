@@ -92,6 +92,7 @@ class GameScene: SKScene {
         santaClausTextures.append(SKTexture(imageNamed: "SantaClaus3"))
         santaClausTextures.append(SKTexture(imageNamed: "SantaClaus4"))
         
+        // Make the Santa Claus moving with animation
         let actionSantaClausAnimation = SKAction.animate(with: santaClausTextures, timePerFrame: 0.25)
         let actionSantaClausAnimationRepeat = SKAction.repeat(actionSantaClausAnimation, count: 10)
         let vectorMoveRight = CGVector(dx: 900, dy: 0 )
@@ -206,13 +207,14 @@ class GameScene: SKScene {
         deer.physicsBody?.mass = 0.1
         deer.physicsBody?.restitution = 0.1
 
-        // Add an animation to the Santa Claus
+        // Add an animation to the deer
         var deerTextures:[SKTexture] = []
         deerTextures.append(SKTexture(imageNamed: "deer1"))
         deerTextures.append(SKTexture(imageNamed: "deer2"))
         deerTextures.append(SKTexture(imageNamed: "deer3"))
         deerTextures.append(SKTexture(imageNamed: "deer4"))
 
+        // Make the deer moving with animation
         let actionDeerAnimation = SKAction.animate(with: deerTextures, timePerFrame: 0.25)
         let actionDeerAnimationRepeat = SKAction.repeat(actionDeerAnimation, count: 10)
         let vector2MoveRight = CGVector(dx: 400, dy: 0 )
