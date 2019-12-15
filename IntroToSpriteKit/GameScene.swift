@@ -75,6 +75,30 @@ class GameScene: SKScene {
         crystal.position = CGPoint(x: background.size.width / 2.5, y: startGroundTile.size.height + crystal.size.height / 2)
         self.addChild(crystal)
         
+        /// Add a walking Santa Claus to the scene
+        
+        // Create the Santa Claus and add it in the scene
+        let santaClaus = SKSpriteNode(imageNamed: "SantaClaus1")
+        santaClaus.position = CGPoint(x: background.size.width / 10, y: startGroundTile.size.height + santaClaus.size.height * 0.8)
+        let actionScaleUp = SKAction.scale(by: 1.5, duration: 0)
+        self.addChild(santaClaus)
+        santaClaus.zPosition = 10
+        santaClaus.run(actionScaleUp)
+        
+        // Add an animation to the Santa Claus
+        var santaClausTextures:[SKTexture] = []
+        santaClausTextures.append(SKTexture(imageNamed: "SantaClaus1"))
+        santaClausTextures.append(SKTexture(imageNamed: "SantaClaus2"))
+        santaClausTextures.append(SKTexture(imageNamed: "SantaClaus3"))
+        santaClausTextures.append(SKTexture(imageNamed: "SantaClaus4"))
+        
+        let actionSantaClausAnimation = SKAction.animate(with: santaClausTextures, timePerFrame: 0.25)
+        let actionSantaClausAnimationRepeat = SKAction.repeat(actionSantaClausAnimation, count: 10)
+        let vectorMoveRight = CGVector(dx: 900, dy: 0 )
+        let actionMoveRight = SKAction.move(by: vectorMoveRight, duration: 10)
+        santaClaus.run(actionSantaClausAnimationRepeat)
+        santaClaus.run(actionMoveRight)
+        
         /// Add a animated snowman into the scene
         
         // Create the snowman and add it in the scene
@@ -82,7 +106,7 @@ class GameScene: SKScene {
         snowman.position = CGPoint(x: background.size.width - igloo.size.width - 85, y: startGroundTile.size.height + snowman.size.height / 2)
         self.addChild(snowman)
         
-        // Add a animation to the snowman
+        // Add an animation to the snowman
         var snowmanTextures: [SKTexture] = []
         snowmanTextures.append(SKTexture(imageNamed: "iceman_01"))
         snowmanTextures.append(SKTexture(imageNamed: "iceman_02"))
@@ -171,6 +195,7 @@ class GameScene: SKScene {
         self.run(sequenceWaitThenAddSecondIce)
         
         /// Add a character walking on ice cubes
+        
         
         /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
