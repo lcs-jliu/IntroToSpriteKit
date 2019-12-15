@@ -258,7 +258,7 @@ class GameScene: SKScene {
         
         // Add a physics body and properities to candy
         candy.physicsBody = SKPhysicsBody(texture: candy.texture!, size: candy.size)
-        candy.physicsBody?.restitution = 0.5
+        candy.physicsBody?.restitution = 0.2
         candy.physicsBody?.usesPreciseCollisionDetection = true
         candy.physicsBody?.mass = 0.01
         self.addChild(candy)
@@ -279,11 +279,11 @@ class GameScene: SKScene {
         letters2.fontSize = 100
         letters2.fontColor = .red
         letters2.text = "Merry"
-        letters2.position = CGPoint(x: 300, y: self.size.height + 50)
+        letters2.position = CGPoint(x: 320, y: self.size.height + 50)
         letters2.zPosition = 10
         
         // Add a physics body to the letters
-        letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 400, height: 100), center: CGPoint(x: 0 ,y: 30))
+        letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 200, height: 100), center: CGPoint(x: 0 ,y: 30))
         
         // Add the letters into the scene
         self.addChild(letters2)
