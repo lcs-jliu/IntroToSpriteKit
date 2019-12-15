@@ -194,8 +194,31 @@ class GameScene: SKScene {
         let sequenceWaitThenAddSecondIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddSecondIceCube])
         self.run(sequenceWaitThenAddSecondIce)
         
-        /// Add a character walking on ice cubes
+        /// Add a deer walking on ice cubes
+        let deer = SKSpriteNode(imageNamed: "deer1")
+        deer.position = CGPoint(x: background.size.width / 3, y: background.size.height + 2 * deer.size.height)
+        self.addChild(deer)
         
+        // Add a physics body and basic properties to it
+        deer.physicsBody = SKPhysicsBody(texture: deer.texture!, size: deer.size)
+        deer.zPosition = 10
+        deer.run(actionScaleUp)
+        deer.physicsBody?.mass = 0.1
+        deer.physicsBody?.restitution = 0.1
+
+        // Add an animation to the Santa Claus
+        var deerTextures:[SKTexture] = []
+        deerTextures.append(SKTexture(imageNamed: "deer1"))
+        deerTextures.append(SKTexture(imageNamed: "deer2"))
+        deerTextures.append(SKTexture(imageNamed: "deer3"))
+        deerTextures.append(SKTexture(imageNamed: "deer4"))
+
+        let actionDeerAnimation = SKAction.animate(with: deerTextures, timePerFrame: 0.25)
+        let actionDeerAnimationRepeat = SKAction.repeat(actionDeerAnimation, count: 10)
+        let vector2MoveRight = CGVector(dx: 400, dy: 0 )
+        let action2MoveRight = SKAction.move(by: vector2MoveRight, duration: 10)
+        deer.run(actionDeerAnimationRepeat)
+        deer.run(action2MoveRight)
         
         /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
@@ -256,11 +279,11 @@ class GameScene: SKScene {
         letters2.fontSize = 100
         letters2.fontColor = .red
         letters2.text = "Merry"
-        letters2.position = CGPoint(x: 400, y: self.size.height + 50)
+        letters2.position = CGPoint(x: 300, y: self.size.height + 50)
         letters2.zPosition = 10
         
         // Add a physics body to the letters
-        letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 500, height: 100), center: CGPoint(x: 0 ,y: 30))
+        letters2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 400, height: 100), center: CGPoint(x: 0 ,y: 30))
         
         // Add the letters into the scene
         self.addChild(letters2)
@@ -283,11 +306,11 @@ class GameScene: SKScene {
     
     func addSecondIceCubes() {
         // Create ice cube in the scene
-        for n in 3...7 {
+        for n in 3...6 {
             let actionFadeIn = SKAction.fadeIn(withDuration: 1)
             let actionFadeOut = SKAction.fadeOut(withDuration: 0)
             let iceCube = SKSpriteNode(imageNamed: "IceBox")
-            let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width
+            let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width * 1.2
             let height = self.size.height / 2 + iceCube.size.height * 1.37
             iceCube.position = CGPoint(x: width, y: height)
             self.addChild(iceCube)
