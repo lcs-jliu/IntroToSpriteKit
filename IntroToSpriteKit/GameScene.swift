@@ -144,7 +144,7 @@ class GameScene: SKScene {
         letters.zPosition = 10
 
         // Add a physics body to the letters
-        letters.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 600, height: 100), center: CGPoint(x: 0 ,y: 45))
+        letters.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 600, height: 100), center: CGPoint(x: 0 ,y: 40))
 
         // Add the letters into the scene
         self.addChild(letters)
@@ -170,6 +170,8 @@ class GameScene: SKScene {
         let sequenceWaitThenAddSecondIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddSecondIceCube])
         self.run(sequenceWaitThenAddSecondIce)
         
+        /// Add a character walking on ice cubes
+        
         /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
         
@@ -180,6 +182,7 @@ class GameScene: SKScene {
         do {
             backgroundMusic = try AVAudioPlayer(contentsOf: backgroundMusicFileURL)
             backgroundMusic?.play()
+        
             
         /// Show end credit
         let actionWaitTwelveSeconds = SKAction.wait(forDuration: 12)
@@ -241,22 +244,30 @@ class GameScene: SKScene {
     func addFirstIceCubes() {
         // Create ice cube in the scene
         for n in 2...7 {
+            let actionFadeIn = SKAction.fadeIn(withDuration: 1)
+            let actionFadeOut = SKAction.fadeOut(withDuration: 0)
             let iceCube = SKSpriteNode(imageNamed: "IceBox")
             let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width / 2
             let height = self.size.height / 2 + iceCube.size.height / 3
             iceCube.position = CGPoint(x: width, y: height)
             self.addChild(iceCube)
+            let FadeIn = SKAction.sequence([actionFadeOut, actionFadeIn])
+            iceCube.run(FadeIn)
         }
     }
     
     func addSecondIceCubes() {
         // Create ice cube in the scene
         for n in 3...7 {
+            let actionFadeIn = SKAction.fadeIn(withDuration: 1)
+            let actionFadeOut = SKAction.fadeOut(withDuration: 0)
             let iceCube = SKSpriteNode(imageNamed: "IceBox")
             let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width
             let height = self.size.height / 2 + iceCube.size.height * 1.37
             iceCube.position = CGPoint(x: width, y: height)
             self.addChild(iceCube)
+            let FadeIn = SKAction.sequence([actionFadeOut, actionFadeIn])
+            iceCube.run(FadeIn)
         }
     }
     
