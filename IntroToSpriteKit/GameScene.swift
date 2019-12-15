@@ -157,11 +157,18 @@ class GameScene: SKScene {
         let sequenceWaitThenDropLetters = SKAction.sequence([actionWaitNineSeconds, actionDropLetters])
         self.run(sequenceWaitThenDropLetters)
         
-        // Add ice cubes once the words are dropped
+        /// Add ice cubes once the words are dropped
+        
+        // Add First row of ice cubes
         let actionwaitTwelveSeconds = SKAction.wait(forDuration: 7.5)
-        let actionAddIceCube = SKAction.run(addIceCube)
+        let actionAddIceCube = SKAction.run(addFirstIceCubes)
         let sequenceWaitThenAddIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddIceCube])
         self.run(sequenceWaitThenAddIce)
+        
+        // Add Second row of ice cubes
+        let actionAddSecondIceCube = SKAction.run(addSecondIceCubes)
+        let sequenceWaitThenAddSecondIce = SKAction.sequence([actionwaitTwelveSeconds, actionAddSecondIceCube])
+        self.run(sequenceWaitThenAddSecondIce)
         
         /// Get a reference to the mp3 file in the app bundle
         let backgroundMusicFilePath = Bundle.main.path(forResource: "sleigh-bells-excerpt.mp3", ofType: nil)!
@@ -231,12 +238,23 @@ class GameScene: SKScene {
         self.addChild(letters2)
     }
     
-    func addIceCube() {
+    func addFirstIceCubes() {
         // Create ice cube in the scene
         for n in 2...7 {
             let iceCube = SKSpriteNode(imageNamed: "IceBox")
             let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width / 2
             let height = self.size.height / 2 + iceCube.size.height / 3
+            iceCube.position = CGPoint(x: width, y: height)
+            self.addChild(iceCube)
+        }
+    }
+    
+    func addSecondIceCubes() {
+        // Create ice cube in the scene
+        for n in 3...7 {
+            let iceCube = SKSpriteNode(imageNamed: "IceBox")
+            let width = self.size.width / 8 * CGFloat(n) - iceCube.size.width
+            let height = self.size.height / 2 + iceCube.size.height * 1.37
             iceCube.position = CGPoint(x: width, y: height)
             self.addChild(iceCube)
         }
